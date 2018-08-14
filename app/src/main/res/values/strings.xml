@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">The Love Diet</string>
+    <string name="create_account">Register New Account</string>
+    <string name="keep_me_logged">Keep me logged in</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="new_account">Create account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="name">Name</string>
+</resources>
