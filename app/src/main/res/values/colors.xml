@@ -8,6 +8,7 @@
 
     <color name="background">#eaeaff</color>
     <color name="white">#ffffff</color>
-    <color name="textColor">#124791</color>
-    <color name="signup_button">#95d92f</color>
+    <color name="textColor">#5A7392</color>
+    <color name="signup_button">#ff293b</color>
+    <color name="newColor">#5A7392</color>
 </resources>

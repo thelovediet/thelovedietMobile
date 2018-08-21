@@ -1,15 +1,12 @@
 package lovedient.com.thelovedietandroid.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.test.ActivityTestCase;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import lovedient.com.thelovedietandroid.Constants;
+import lovedient.com.thelovedietandroid.utils.Constants;
 import lovedient.com.thelovedietandroid.R;
 import lovedient.com.thelovedietandroid.utils.SystemUtils;
 

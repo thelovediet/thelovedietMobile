@@ -27,9 +27,9 @@
                 <ImageView
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_logo"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp" />
+                    android:src="@drawable/ic_final_logo"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
                 <!---->
                 <TextView
                     android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/email"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/newColor"
                     android:textSize="15sp" />
 
                 <EditText
@@ -50,8 +50,8 @@
                     android:hint="@string/email"
                     android:paddingLeft="10dp"
                     android:paddingStart="10dp"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor" />
+                    android:textColor="@color/newColor"
+                    android:textColorHint="@color/newColor" />
                 <!---->
                 <TextView
                     android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/password"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/newColor"
                     android:textSize="15sp" />
 
                 <EditText
@@ -72,10 +72,10 @@
                     android:hint="@string/password"
                     android:paddingLeft="10dp"
                     android:paddingStart="10dp"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor" />
+                    android:textColor="@color/newColor"
+                    android:textColorHint="@color/newColor" />
                 <CheckBox
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/newColor"
                     android:text="@string/keep_me_logged"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
@@ -110,7 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/forgot_password"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/textColor"
                         android:textSize="15sp"
                         android:layout_alignParentLeft="true" />
                     <TextView
@@ -120,23 +120,25 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="@string/new_account"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/textColor"
                         android:textSize="15sp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <ImageView
+
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_google_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:src="@drawable/goole_new"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                     />
                 <ImageView
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_facebook"
-                    android:layout_width="wrap_content"
+                    android:src="@drawable/fb_new"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
