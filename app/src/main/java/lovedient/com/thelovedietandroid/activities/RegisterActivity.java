@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -55,10 +56,15 @@ import lovedient.com.thelovedietandroid.utils.VolleyMultipartRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    TextView create_account_heading,email_heading,name_heading,password_heading,retype_password_heading,
+            portrait_heading,gender_heading,date_headin,country_heading,unit_heaading,time_heading,
+            register_heading;
+
     EditText regitser_userName, register_email, register_password, register_retype_password,
             date, month, year;
     RadioGroup register_gendergroup, radio_group_pound, radio_group_time;
-    RadioButton genderRadio, timeRadio, uniRadio;
+    RadioButton genderRadio, timeRadio, uniRadio,register_radio_male,register_radio_female,radio_pound,radio_weight,
+    radio_tw,radio_tf;
     ProgressBar register_progressbar;
     CardView register_btn;
     Spinner country;
@@ -77,11 +83,29 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void setXML() {
+        radio_tf = findViewById(R.id.radio_tf);
+        radio_tw = findViewById(R.id.radio_tw);
+        radio_weight = findViewById(R.id.radio_weight);
+        radio_pound = findViewById(R.id.radio_pound);
+        register_radio_male = findViewById(R.id.register_radio_male);
+        register_radio_female = findViewById(R.id.register_radio_female);
         regitser_userName = findViewById(R.id.regitser_userName);
         register_email = findViewById(R.id.register_email);
         register_password = findViewById(R.id.register_password);
         select_image = findViewById(R.id.select_image);
         profile_image = findViewById(R.id.profile_image);
+        create_account_heading = findViewById(R.id.create_account_heading);
+        email_heading = findViewById(R.id.email_heading);
+        name_heading = findViewById(R.id.name_heading);
+        password_heading = findViewById(R.id.password_heading);
+        retype_password_heading = findViewById(R.id.retype_password_heading);
+        portrait_heading = findViewById(R.id.portrait_heading);
+        gender_heading = findViewById(R.id.gender_heading);
+        date_headin = findViewById(R.id.date_heading);
+        country_heading = findViewById(R.id.country_heading);
+        unit_heaading = findViewById(R.id.unit_heaading);
+        time_heading = findViewById(R.id.time_heading);
+        register_heading = findViewById(R.id.register_heading);
         register_retype_password = findViewById(R.id.register_retype_password);
         date = findViewById(R.id.date);
         month = findViewById(R.id.month);
@@ -90,6 +114,36 @@ public class RegisterActivity extends AppCompatActivity {
         radio_group_pound = findViewById(R.id.radio_group_pound);
         radio_group_time = findViewById(R.id.radio_group_time);
         country = findViewById(R.id.country);
+
+        // Apply Fonts
+        regitser_userName.setTypeface(SystemUtils.applyFont());
+        register_email.setTypeface(SystemUtils.applyFont());
+        register_password.setTypeface(SystemUtils.applyFont());
+        create_account_heading.setTypeface(SystemUtils.applyFont());
+        email_heading.setTypeface(SystemUtils.applyFont());
+        name_heading.setTypeface(SystemUtils.applyFont());
+        password_heading.setTypeface(SystemUtils.applyFont());
+        retype_password_heading.setTypeface(SystemUtils.applyFont());
+        portrait_heading.setTypeface(SystemUtils.applyFont());
+        gender_heading.setTypeface(SystemUtils.applyFont());
+        date_headin.setTypeface(SystemUtils.applyFont());
+        country_heading.setTypeface(SystemUtils.applyFont());
+        unit_heaading.setTypeface(SystemUtils.applyFont());
+        time_heading.setTypeface(SystemUtils.applyFont());
+        register_heading.setTypeface(SystemUtils.applyFont());
+        register_retype_password.setTypeface(SystemUtils.applyFont());
+        date.setTypeface(SystemUtils.applyFont());
+        month.setTypeface(SystemUtils.applyFont());
+        year.setTypeface(SystemUtils.applyFont());
+        year.setTypeface(SystemUtils.applyFont());
+        year.setTypeface(SystemUtils.applyFont());
+        register_radio_female.setTypeface(SystemUtils.applyFont());
+        register_radio_male.setTypeface(SystemUtils.applyFont());
+        radio_tf.setTypeface(SystemUtils.applyFont());
+        radio_tw.setTypeface(SystemUtils.applyFont());
+        radio_weight.setTypeface(SystemUtils.applyFont());
+        radio_pound.setTypeface(SystemUtils.applyFont());
+
         register_progressbar = findViewById(R.id.register_progressbar);
         register_btn = findViewById(R.id.register_btn);
         register_btn.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +156,9 @@ public class RegisterActivity extends AppCompatActivity {
                     genderRadio = findViewById(genderId);
                     uniRadio = findViewById(unitId);
                     timeRadio = findViewById(timeId);
+                    genderRadio.setTypeface(SystemUtils.applyFont());
+                    uniRadio.setTypeface(SystemUtils.applyFont());
+                    timeRadio.setTypeface(SystemUtils.applyFont());
                     Bitmap bitmap = ((BitmapDrawable)profile_image.getDrawable()).getBitmap();
                     sendImage(bitmap);
                 }
@@ -199,11 +256,12 @@ public class RegisterActivity extends AppCompatActivity {
                                         userModel.setTimeFormate(dataObject.getString("time_format"));
                                         pref.setObjectData(Constants.USER_OBJECT, userModel);
                                         SystemUtils.showCustomToast(
-                                                getResources().getString(R.string.user_register),RegisterActivity.this);
+                                                getResources().getString(R.string.login_successfully),RegisterActivity.this);
+                                       // finish();
                                     }
 
                                 }else{
-                                    SystemUtils.showCustomToast(  getResources().getString(R.string.user_not_register),RegisterActivity.this);
+                                    SystemUtils.showCustomToast(  getResources().getString(R.string.invalid_email_password),RegisterActivity.this);
                                 }
 
                             }
@@ -226,10 +284,11 @@ public class RegisterActivity extends AppCompatActivity {
                 map.put(Constants.EMAIL, register_email.getText().toString());
                 map.put(Constants.PASSWORD, register_password.getText().toString());
                 map.put(Constants.GENDER, genderRadio.getText().toString());
-                map.put(Constants.DATE_OF_BIRTH, date + "/" + month + "/" + year);
+                map.put(Constants.DATE_OF_BIRTH, date.getText().toString() + "/" + month.getText().toString() + "/" + year.getText().toString());
                 map.put(Constants.COUNTRY, country.getSelectedItem().toString());
                 map.put(Constants.UNITS, uniRadio.getText().toString());
                 map.put(Constants.TIME_FORMATE, timeRadio.getText().toString());
+                map.put(Constants.TYPE, Constants.TYPE_NORMAL);
                 return map;
             }
 

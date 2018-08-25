@@ -16,4 +16,10 @@ public class Constants {
     public static String UNITS="m_units";
     public static String TIME_FORMATE="time_format";
     public static String USER_IMAGE="user_image";
+    public static String TYPE="type";
+
+    public static String TYPE_NORMAL="normal";
+    public static String TYPE_FACBOOK="facebook";
+    public static String TYPE_GMAIL="gmail";
+
 }

@@ -9,6 +9,7 @@
     <string name="password">Password</string>
     <string name="retype_password">Retype Password</string>
     <string name="name">Name</string>
+    <string name="done">Done</string>
     <string name="portrait">Portrait</string>
     <string name="enter_name">Please enter name</string>
     <string name="enter_email">Please enter email</string>
@@ -20,8 +21,14 @@
     <string name="year_missing">Year missing</string>
     <string name="user_register">User SuccessFully Register</string>
     <string name="user_not_register">Sorry User Not Register</string>
+    <string name="login_successfully">Login Successfully</string>
+    <string name="invalid_email_password">Invalid Email or Password</string>
+    <string name="email_send">Email Has been sended you please check your inbox or spam</string>
+    <!-- FaceBook SDK Download-->
+    <string name="facebook_app_id">684048018617389</string>
+    <string name="fb_login_protocol_scheme">fb684048018617389</string>
 
-
+    <string name="server_client_id">168228647748-cppchdauo86sbof5montuc96ghhjgjge.apps.googleusercontent.com</string>
     <!--Country Lists-->
     <string name="country_prompt">Choose a country</string>
     <string-array name="country_arrays">

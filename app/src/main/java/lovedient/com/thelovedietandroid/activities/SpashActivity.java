@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import lovedient.com.thelovedietandroid.R;
+import lovedient.com.thelovedietandroid.utils.SystemPref;
 import lovedient.com.thelovedietandroid.utils.SystemUtils;
 
 public class SpashActivity extends AppCompatActivity {
@@ -16,7 +17,12 @@ public class SpashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spash);
         SystemUtils.setActivity(this);
-        spashTime();
+        SystemPref pref = new SystemPref(getApplicationContext());
+        if (pref.isLogin()) {
+            startActivity(new Intent(getApplicationContext(), MainPointActivity.class));
+        } else {
+            spashTime();
+        }
     }
     public void spashTime(){
         new Handler().postDelayed(new Runnable() {

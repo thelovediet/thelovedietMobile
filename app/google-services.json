@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "624024069660",
+    "firebase_url": "https://lovedietapp.firebaseio.com",
+    "project_id": "lovedietapp",
+    "storage_bucket": "lovedietapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624024069660:android:2fb3fdd7211d01cd",
+        "android_client_info": {
+          "package_name": "lovedient.com.thelovedietandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624024069660-kke8mel9fdrkk7evklj4m77vhp8oiqp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lovedient.com.thelovedietandroid",
+            "certificate_hash": "cacfb56baf3fdad06eff9018edde7913906fb86e"
+          }
+        },
+        {
+          "client_id": "624024069660-c9lgooogn5s0j1hhbcs7nttf7gciri4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVprCTzV9Oci7YA5hVWioLxip9xpaocuI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624024069660-c9lgooogn5s0j1hhbcs7nttf7gciri4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
