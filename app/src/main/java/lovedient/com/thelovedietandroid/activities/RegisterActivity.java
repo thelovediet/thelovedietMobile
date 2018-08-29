@@ -1,5 +1,6 @@
 package lovedient.com.thelovedietandroid.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +41,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +53,7 @@ import lovedient.com.thelovedietandroid.network.EndPoints;
 import lovedient.com.thelovedietandroid.network.VollyInitilization;
 import lovedient.com.thelovedietandroid.utils.Constants;
 import lovedient.com.thelovedietandroid.utils.EditTextHelper;
+import lovedient.com.thelovedietandroid.utils.MySpinnerAdapter;
 import lovedient.com.thelovedietandroid.utils.SystemPref;
 import lovedient.com.thelovedietandroid.utils.SystemUtils;
 import lovedient.com.thelovedietandroid.utils.VolleyMultipartRequest;
@@ -116,9 +120,9 @@ public class RegisterActivity extends AppCompatActivity {
         country = findViewById(R.id.country);
 
         // Apply Fonts
-        regitser_userName.setTypeface(SystemUtils.applyFont());
-        register_email.setTypeface(SystemUtils.applyFont());
-        register_password.setTypeface(SystemUtils.applyFont());
+        regitser_userName.setTypeface(SystemUtils.didnoFont());
+        register_email.setTypeface(SystemUtils.didnoFont());
+        register_password.setTypeface(SystemUtils.didnoFont());
         create_account_heading.setTypeface(SystemUtils.applyFont());
         email_heading.setTypeface(SystemUtils.applyFont());
         name_heading.setTypeface(SystemUtils.applyFont());
@@ -130,19 +134,18 @@ public class RegisterActivity extends AppCompatActivity {
         country_heading.setTypeface(SystemUtils.applyFont());
         unit_heaading.setTypeface(SystemUtils.applyFont());
         time_heading.setTypeface(SystemUtils.applyFont());
-        register_heading.setTypeface(SystemUtils.applyFont());
-        register_retype_password.setTypeface(SystemUtils.applyFont());
-        date.setTypeface(SystemUtils.applyFont());
-        month.setTypeface(SystemUtils.applyFont());
-        year.setTypeface(SystemUtils.applyFont());
-        year.setTypeface(SystemUtils.applyFont());
-        year.setTypeface(SystemUtils.applyFont());
-        register_radio_female.setTypeface(SystemUtils.applyFont());
-        register_radio_male.setTypeface(SystemUtils.applyFont());
-        radio_tf.setTypeface(SystemUtils.applyFont());
-        radio_tw.setTypeface(SystemUtils.applyFont());
-        radio_weight.setTypeface(SystemUtils.applyFont());
-        radio_pound.setTypeface(SystemUtils.applyFont());
+        register_heading.setTypeface(SystemUtils.didnoFont());
+        register_retype_password.setTypeface(SystemUtils.didnoFont());
+        date.setTypeface(SystemUtils.didnoFont());
+        month.setTypeface(SystemUtils.didnoFont());
+        year.setTypeface(SystemUtils.didnoFont());
+        year.setTypeface(SystemUtils.didnoFont());
+        register_radio_female.setTypeface(SystemUtils.didnoFont());
+        register_radio_male.setTypeface(SystemUtils.didnoFont());
+        radio_tf.setTypeface(SystemUtils.didnoFont());
+        radio_tw.setTypeface(SystemUtils.didnoFont());
+        radio_weight.setTypeface(SystemUtils.didnoFont());
+        radio_pound.setTypeface(SystemUtils.didnoFont());
 
         register_progressbar = findViewById(R.id.register_progressbar);
         register_btn = findViewById(R.id.register_btn);
@@ -164,6 +167,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        MySpinnerAdapter adapter = new MySpinnerAdapter(getApplicationContext(),
+                R.layout.country_spinner_layout,
+                Arrays.asList(getResources().getStringArray(R.array.country_arrays))
+        );
+        country.setAdapter(adapter);
         select_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,7 +265,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         pref.setObjectData(Constants.USER_OBJECT, userModel);
                                         SystemUtils.showCustomToast(
                                                 getResources().getString(R.string.login_successfully),RegisterActivity.this);
-                                       // finish();
+                                       finish();
                                     }
 
                                 }else{

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -56,5 +57,13 @@ public class SystemUtils {
                 "fonts/CHERL___.TTF");
         return  font;
     }
-
+    public static Typeface didnoFont(){
+        Typeface font =  Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Didno.ttf");
+        return  font;
+    }
+    public static  boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
 }

@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">The Love Diet</string>
+    <string name="userName">Username*</string>
     <string name="create_account">Register New Account</string>
     <string name="keep_me_logged">Keep me logged in</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="new_account">Create account</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="retype_password">Retype Password</string>
+    <string name="password">Password*</string>
+    <string name="retype_password">Retype Password*</string>
+    <string name="birthday">Birthday*</string>
+    <string name="country">Country*</string>
+    <string name="unity_format">Unit Format*</string>
     <string name="name">Name</string>
     <string name="done">Done</string>
     <string name="portrait">Portrait</string>
@@ -31,6 +35,8 @@
     <string name="server_client_id">168228647748-cppchdauo86sbof5montuc96ghhjgjge.apps.googleusercontent.com</string>
     <!--Country Lists-->
     <string name="country_prompt">Choose a country</string>
+    <string name="i_agree">I agree with the</string>
+    <string name="term_ref">Terms  of Reference.*</string>
     <string-array name="country_arrays">
         <item>Afghanistan</item>
         <item>Albania</item>
@@ -275,4 +281,12 @@
         <item>Zimbabwe</item>
     </string-array>
 
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="units">
+        <item>Pound/Feet</item>
+        <item>kg/cm</item>
+    </string-array>
 </resources>

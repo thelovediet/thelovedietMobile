@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#34a2bd</color>
-    <color name="colorPrimaryDark">#1b93b1</color>
-    <color name="colorAccent">#1b93b1</color>
+    <color name="colorPrimary">#F76262</color>
+    <color name="colorPrimaryDark">#F76262</color>
+    <color name="colorAccent">#F76262</color>
 
     <!--Other Colors -->
 
     <color name="background">#eaeaff</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="textColor">#5A7392</color>
     <color name="signup_button">#ff293b</color>
     <color name="newColor">#5A7392</color>
+    <color name="lestBackground">#F76262</color>
+    <color name="bottom_background">#f6fafa</color>
+    <color name="gray_text">#878787</color>
 </resources>

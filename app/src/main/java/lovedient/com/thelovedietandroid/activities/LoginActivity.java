@@ -1,9 +1,16 @@
 package lovedient.com.thelovedietandroid.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -70,6 +77,7 @@ import lovedient.com.thelovedietandroid.utils.SystemUtils;
 
 public class LoginActivity extends AppCompatActivity  implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG  = LoginActivity.class.getSimpleName();
+    private static final int MY_CAMERA_REQUEST_CODE = 20001;
     TextView login_activity_create_acount,login_activity_forgot,login_heaading
             ,password_heading,email_heading;
     Activity activity;
@@ -96,7 +104,10 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
         activity=this;
         setXML();
     }
+
+    @SuppressLint("NewApi")
     public void setXML(){
+
         email_heading = findViewById(R.id.email_heading);
         password_heading = findViewById(R.id.password_heading);
         login_heaading = findViewById(R.id.login_heaading);
@@ -118,13 +129,19 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
          // Apply Fonts
         email_heading.setTypeface(SystemUtils.applyFont());
         password_heading.setTypeface(SystemUtils.applyFont());
-        login_heaading.setTypeface(SystemUtils.applyFont());
-        login_activity_create_acount.setTypeface(SystemUtils.applyFont());
-        login_activity_keep_login.setTypeface(SystemUtils.applyFont());
-        login_activity_forgot.setTypeface(SystemUtils.applyFont());
-        login_activity_forgot.setTypeface(SystemUtils.applyFont());
-        login_activity_email.setTypeface(SystemUtils.applyFont());
-        login_activity_password.setTypeface(SystemUtils.applyFont());
+        login_heaading.setTypeface(SystemUtils.didnoFont());
+        login_activity_create_acount.setTypeface(SystemUtils.didnoFont());
+        login_activity_keep_login.setTypeface(SystemUtils.didnoFont());
+        login_activity_forgot.setTypeface(SystemUtils.didnoFont());
+        login_activity_email.setTypeface(SystemUtils.didnoFont());
+        login_activity_password.setTypeface(SystemUtils.didnoFont());
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE
+                },
+                MY_CAMERA_REQUEST_CODE);
     }
 
     @Override
@@ -187,7 +204,12 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                                 SystemUtils.startActivity(LoginActivity.this, MainPointActivity.class , Constants.FINISH_MODE);
                             }
                         }
+                        else {
+                            SystemUtils.showCustomToast(
+                                    getResources().getString(R.string.invalid_email_password), LoginActivity.this);
+                        }
                     }
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -436,6 +458,11 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                         // ...
                     }
                 });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 }
 
