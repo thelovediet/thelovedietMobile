@@ -19,41 +19,20 @@ import lovedient.com.thelovedietandroid.utils.SystemUtils;
 
 public class SpashActivity extends AppCompatActivity {
     private final int TIME_OUT=2000;
-    private DatePicker datePicker;
-    private Calendar calendar;
-    private TextView dateView;
-    private int year, month, day;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.activity_spash);
-        setContentView(R.layout.new_registration_layout);
+        setContentView(R.layout.activity_spash);
         SystemUtils.setActivity(this);
         SystemPref pref = new SystemPref(getApplicationContext());
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
 
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        final Calendar c = Calendar.getInstance();
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                       // txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                    }
-                }, year, month, day);
-        datePickerDialog.show();
-      /*  if (pref.isLogin()) {
+       if (pref.isLogin()) {
             startActivity(new Intent(getApplicationContext(), MainPointActivity.class));
         } else {
             spashTime();
-        }*/
+        }
     }
     public void spashTime(){
         new Handler().postDelayed(new Runnable() {

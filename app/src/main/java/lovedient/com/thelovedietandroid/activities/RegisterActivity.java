@@ -163,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                     uniRadio.setTypeface(SystemUtils.applyFont());
                     timeRadio.setTypeface(SystemUtils.applyFont());
                     Bitmap bitmap = ((BitmapDrawable)profile_image.getDrawable()).getBitmap();
-                    sendImage(bitmap);
+                  //  sendImage(bitmap);
                 }
             }
         });
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
         select_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPictureDialog();
+
             }
         });
     }
@@ -234,190 +234,5 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    private void sendImage(final Bitmap bitmap) {
-        final SystemPref pref = new SystemPref(getApplicationContext());
-        register_progressbar.setVisibility(View.VISIBLE);
-        VolleyMultipartRequest request = new VolleyMultipartRequest(Request.Method.POST,
-                EndPoints.REGISTER_URL,
-                new Response.Listener<NetworkResponse>() {
-                    @Override
-                    public void onResponse(NetworkResponse response) {
-                        Log.v(TAG + "uploadImage", response.allHeaders.toArray().toString());
-                        register_progressbar.setVisibility(View.GONE);
-                        String data = new String(response.data);
-                        try {
-                            JSONObject dataJson = new JSONObject(data);
-                            Log.v(TAG + "dataJson", dataJson.toString());
-                            if(dataJson.has("status")){
-                                if(dataJson.getBoolean("status")){
-                                    UserModel userModel = new UserModel();
-                                    JSONObject result = dataJson.getJSONObject("result");
-                                    if(result.has("data")) {
-                                        JSONObject dataObject = result.getJSONObject("data");
-                                        userModel.setId(dataObject.getString("id"));
-                                        userModel.setUserName(dataObject.getString("name"));
-                                        userModel.setGender(dataObject.getString("gender"));
-                                        userModel.setDateOfBirth(dataObject.getString("dob"));
-                                        userModel.setCountry(dataObject.getString("country"));
-                                        userModel.setImagePath(dataObject.getString("user_image"));
-                                        userModel.setUnits(dataObject.getString("m_units"));
-                                        userModel.setTimeFormate(dataObject.getString("time_format"));
-                                        pref.setObjectData(Constants.USER_OBJECT, userModel);
-                                        SystemUtils.showCustomToast(
-                                                getResources().getString(R.string.login_successfully),RegisterActivity.this);
-                                       finish();
-                                    }
 
-                                }else{
-                                    SystemUtils.showCustomToast(  getResources().getString(R.string.invalid_email_password),RegisterActivity.this);
-                                }
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> map = new HashMap<>();
-                map.put(Constants.NAME, regitser_userName.getText().toString());
-                map.put(Constants.EMAIL, register_email.getText().toString());
-                map.put(Constants.PASSWORD, register_password.getText().toString());
-                map.put(Constants.GENDER, genderRadio.getText().toString());
-                map.put(Constants.DATE_OF_BIRTH, date.getText().toString() + "/" + month.getText().toString() + "/" + year.getText().toString());
-                map.put(Constants.COUNTRY, country.getSelectedItem().toString());
-                map.put(Constants.UNITS, uniRadio.getText().toString());
-                map.put(Constants.TIME_FORMATE, timeRadio.getText().toString());
-                map.put(Constants.TYPE, Constants.TYPE_NORMAL);
-                return map;
-            }
-
-            @Override
-            protected Map<String, DataPart> getByteData() {
-                Map<String, DataPart> params = new HashMap<>();
-                // file name could found file base or direct access from real path
-                // for now just get bitmap data from ImageView
-                params.put(Constants.USER_IMAGE, new DataPart(Calendar.getInstance()
-                        .getTimeInMillis() + "file_avatar.jpg", getFileDataFromDrawable(bitmap), "image/jpeg"));
-
-                return params;
-            }
-
-        };
-        VollyInitilization.getInstance(getApplicationContext()).addToRequestQueue(request);
-    }
-
-    /**
-     * Convert image Bitmap to Bytes
-     *
-     * @param bitmap
-     * @return
-     */
-    public static byte[] getFileDataFromDrawable(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-
-    private void showPictureDialog() {
-        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
-        pictureDialog.setTitle("Select Action");
-        String[] pictureDialogItems = {
-                "Select photo from gallery",
-                "Capture photo from camera"};
-        pictureDialog.setItems(pictureDialogItems,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                choosePhotoFromGallary();
-                                break;
-                            case 1:
-                                takePhotoFromCamera();
-                                break;
-                        }
-                    }
-                });
-        pictureDialog.show();
-    }
-
-    public void choosePhotoFromGallary() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(galleryIntent, GALLERY);
-    }
-
-    private void takePhotoFromCamera() {
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == this.RESULT_CANCELED) {
-            return;
-        }
-        if (requestCode == GALLERY) {
-            if (data != null) {
-                Uri contentURI = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-                    String path = saveImage(bitmap);
-                    Toast.makeText(RegisterActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    profile_image.setImageBitmap(bitmap);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(RegisterActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            profile_image.setImageBitmap(thumbnail);
-            saveImage(thumbnail);
-            Toast.makeText(RegisterActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public String saveImage(Bitmap myBitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File wallpaperDirectory = new File(
-                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
-        if (!wallpaperDirectory.exists()) {
-            wallpaperDirectory.mkdirs();
-        }
-
-        try {
-            File f = new File(wallpaperDirectory, Calendar.getInstance()
-                    .getTimeInMillis() + ".jpg");
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            MediaScannerConnection.scanFile(this,
-                    new String[]{f.getPath()},
-                    new String[]{"image/jpeg"}, null);
-            fo.close();
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
-
-            return f.getAbsolutePath();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        return "";
-    }
 }

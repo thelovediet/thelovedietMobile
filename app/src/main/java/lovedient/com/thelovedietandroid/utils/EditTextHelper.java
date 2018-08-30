@@ -19,7 +19,7 @@ public class EditTextHelper {
         return Patterns.EMAIL_ADDRESS.matcher(charSequence).matches();
     }
     public boolean isEmptyField(EditText editText){
-        return TextUtils.isEmpty(editText.getText().toString());
+        return TextUtils.isEmpty(editText.getText().toString().trim());
     }
     public void setError(EditText editText,String message){
         editText.setError(message);

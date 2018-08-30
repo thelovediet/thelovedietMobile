@@ -1,12 +1,15 @@
 package lovedient.com.thelovedietandroid.utils;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,23 @@ public class SystemUtils {
         toast.setView(layout);
         toast.show();
     }
+    public static void showErrorMessage(String message,Activity activity){
+            final Dialog view = new Dialog(activity);
+        view.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        view.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        view.setCancelable(false);
+        view.setContentView(R.layout.message_popup);
+        TextView msg = view.findViewById(R.id.message);
+        ImageView close = view.findViewById(R.id.close);
+        msg.setText(message);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.dismiss();
+            }
+        });
+        view.show();
+    }
     public static UserModel getUserStatus(Context context){
         SystemPref systemPref = new SystemPref(context);
         UserModel userStatus = (UserModel) systemPref.getOjectData(Constants.USER_OBJECT,UserModel.class);
@@ -60,6 +80,10 @@ public class SystemUtils {
     public static Typeface didnoFont(){
         Typeface font =  Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Didno.ttf");
+        return  font;
+    } public static Typeface robotoFont(){
+        Typeface font =  Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Roboto.ttf");
         return  font;
     }
     public static  boolean isNetworkConnected() {

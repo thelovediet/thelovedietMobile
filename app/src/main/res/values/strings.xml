@@ -6,12 +6,14 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="new_account">Create account</string>
-    <string name="email">Email</string>
+    <string name="email">Email*</string>
+    <string name="retype_email">Retype Email*</string>
     <string name="password">Password*</string>
     <string name="retype_password">Retype Password*</string>
     <string name="birthday">Birthday*</string>
     <string name="country">Country*</string>
     <string name="unity_format">Unit Format*</string>
+    <string name="time_formate">Time Format*</string>
     <string name="name">Name</string>
     <string name="done">Done</string>
     <string name="portrait">Portrait</string>
@@ -22,12 +24,16 @@
     <string name="password_not_match">Password not match</string>
     <string name="date_missing">Date missing</string>
     <string name="month_missing">Month missing</string>
+    <string name="fill_field">Fill Field</string>
+    <string name="email_not_match">Email Not Match</string>
     <string name="year_missing">Year missing</string>
     <string name="user_register">User SuccessFully Register</string>
     <string name="user_not_register">Sorry User Not Register</string>
     <string name="login_successfully">Login Successfully</string>
+    <string name="user_created">User Successfully Created</string>
     <string name="invalid_email_password">Invalid Email or Password</string>
     <string name="email_send">Email Has been sended you please check your inbox or spam</string>
+    <string name="please_fill">Please fill in all mandatory fields.</string>
     <!-- FaceBook SDK Download-->
     <string name="facebook_app_id">684048018617389</string>
     <string name="fb_login_protocol_scheme">fb684048018617389</string>
@@ -288,5 +294,9 @@
     <string-array name="units">
         <item>Pound/Feet</item>
         <item>kg/cm</item>
+    </string-array>
+    <string-array name="time">
+        <item>24</item>
+        <item>12</item>
     </string-array>
 </resources>

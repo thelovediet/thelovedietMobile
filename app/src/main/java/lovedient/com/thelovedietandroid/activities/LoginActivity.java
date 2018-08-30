@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.login_activity_create_acount){
-            SystemUtils.startActivity(activity, RegisterActivity.class, Constants.CONTINUE_MODE);
+            SystemUtils.startActivity(activity, NewRegisterActivity.class, Constants.CONTINUE_MODE);
         }
         if(v.getId()==R.id.login_activity_btn){
             if(checkForm()){
