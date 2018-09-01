@@ -67,6 +67,25 @@ public class SystemUtils {
         });
         view.show();
     }
+    public static void showMessageType(String message,Activity activity,String type){
+            final Dialog view = new Dialog(activity);
+        view.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        view.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        view.setCancelable(false);
+        view.setContentView(R.layout.message_popup);
+        TextView msg = view.findViewById(R.id.message);
+        TextView error = view.findViewById(R.id.error);
+        error.setText(type);
+        ImageView close = view.findViewById(R.id.close);
+        msg.setText(message);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.dismiss();
+            }
+        });
+        view.show();
+    }
     public static UserModel getUserStatus(Context context){
         SystemPref systemPref = new SystemPref(context);
         UserModel userStatus = (UserModel) systemPref.getOjectData(Constants.USER_OBJECT,UserModel.class);

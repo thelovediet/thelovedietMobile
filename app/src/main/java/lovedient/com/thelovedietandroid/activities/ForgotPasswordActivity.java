@@ -1,14 +1,14 @@
 package lovedient.com.thelovedietandroid.activities;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,32 +32,53 @@ import lovedient.com.thelovedietandroid.utils.SystemUtils;
 public class ForgotPasswordActivity extends AppCompatActivity {
     private static final String TAG =  ForgotPasswordActivity.class.getSimpleName();
     EditText forgot_activity_email;
-    CardView forgot_activity_btn;
+    Button forgot_activity_btn;
     ProgressBar forgot_progressbar;
-    TextView email_heading,done_heading;
+    String success= "Email Has been sended you please check your inbox or spam.";
+    String error= "Invalid Email. No user found against this user";
+    ImageView register_account,already_account,back;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.new_forgot);
+        activity = this;
         setXML();
     }
     public void setXML(){
         forgot_activity_email = findViewById(R.id.forgot_activity_email);
         forgot_activity_btn = findViewById(R.id.forgot_activity_btn);
-        email_heading = findViewById(R.id.email_heading);
-        done_heading = findViewById(R.id.done_heading);
         forgot_progressbar = findViewById(R.id.forgot_progressbar);
+        register_account = findViewById(R.id.register_account);
+        already_account = findViewById(R.id.already_account);
+        back = findViewById(R.id.back);
         // apply fonts
-        forgot_activity_email.setTypeface(SystemUtils.applyFont());
-        email_heading.setTypeface(SystemUtils.applyFont());
-        done_heading.setTypeface(SystemUtils.applyFont());
-
+        forgot_activity_email.setTypeface(SystemUtils.robotoFont());
         forgot_activity_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkForm()) {
                     forgotPassword();
                 }
+            }
+        });
+        // Back Press
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        register_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SystemUtils.startActivity(activity, NewRegisterActivity.class, Constants.FINISH_MODE);
+            }
+        });
+        already_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SystemUtils.startActivity(activity, LoginActivity.class, Constants.FINISH_MODE);
             }
         });
     }
@@ -71,9 +92,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if(jsonObject.getBoolean("status")){
-                        SystemUtils.showCustomToast(SystemUtils.getActivity().getResources().
-                                getString(R.string.email_send),ForgotPasswordActivity.this );
+                        if(jsonObject.getString("message").equalsIgnoreCase(success)){
+                        SystemUtils.showMessageType(jsonObject.getString("message"),
+                                ForgotPasswordActivity.this ,"SUCCESS");
+                            forgot_activity_email.setText("");
+                        }
+                        if(jsonObject.getString("message").equalsIgnoreCase(error)){
+                        SystemUtils.showMessageType(jsonObject.getString("message"),
+                                ForgotPasswordActivity.this ,"ERROR");}
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -20,7 +20,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/lestBackground">
+                android:background="@drawable/rectangle">
 
                 <ImageView
                     android:layout_marginTop="10dp"

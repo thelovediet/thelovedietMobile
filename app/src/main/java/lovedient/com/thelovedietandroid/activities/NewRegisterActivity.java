@@ -99,6 +99,17 @@ public class NewRegisterActivity  extends AppCompatActivity {
         register_btn = findViewById(R.id.register_btn);
         already_register = findViewById(R.id.already_register);
         register_progressbar = findViewById(R.id.register_progressbar);
+
+        //apply Font
+        register_useName.setTypeface(SystemUtils.robotoFont());
+        registerEmail.setTypeface(SystemUtils.robotoFont());
+        registerRetypeEmail.setTypeface(SystemUtils.robotoFont());
+        registerPassowrd.setTypeface(SystemUtils.robotoFont());
+        registerRePassowrd.setTypeface(SystemUtils.robotoFont());
+        register_birthDate.setTypeface(SystemUtils.robotoFont());
+
+
+
         setActions();
     }
     public void setActions(){
@@ -152,6 +163,13 @@ public class NewRegisterActivity  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        already_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SystemUtils.startActivity(NewRegisterActivity.this, LoginActivity.class,
+                        Constants.FINISH_MODE);
             }
         });
     }

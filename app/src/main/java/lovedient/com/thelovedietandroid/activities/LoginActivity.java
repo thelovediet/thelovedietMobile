@@ -72,21 +72,22 @@ import lovedient.com.thelovedietandroid.network.VollyInitilization;
 import lovedient.com.thelovedietandroid.utils.Constants;
 import lovedient.com.thelovedietandroid.R;
 import lovedient.com.thelovedietandroid.utils.EditTextHelper;
+import lovedient.com.thelovedietandroid.utils.KeyboardUtils;
 import lovedient.com.thelovedietandroid.utils.SystemPref;
 import lovedient.com.thelovedietandroid.utils.SystemUtils;
 
 public class LoginActivity extends AppCompatActivity  implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG  = LoginActivity.class.getSimpleName();
     private static final int MY_CAMERA_REQUEST_CODE = 20001;
-    TextView login_activity_create_acount,login_activity_forgot,login_heaading
+    TextView login_activity_create_acount
             ,password_heading,email_heading;
     Activity activity;
-    CheckBox login_activity_keep_login;
+
     EditText login_activity_email,login_activity_password;
-    CardView login_activity_btn;
+    Button login_activity_btn;
     ProgressBar register_progressbar;
     private CallbackManager callbackManager;
-    ImageView login_fb_btn,google_sign_btn;
+    ImageView facebook_btn,google_btn,already_account,forgot_passowrd;
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -98,9 +99,8 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         initializeFacebook();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_new_login);
         configureSignIn();
-
         activity=this;
         setXML();
     }
@@ -110,31 +110,23 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
 
         email_heading = findViewById(R.id.email_heading);
         password_heading = findViewById(R.id.password_heading);
-        login_heaading = findViewById(R.id.login_heaading);
-        login_activity_create_acount = findViewById(R.id.login_activity_create_acount);
-        login_activity_keep_login = findViewById(R.id.login_activity_keep_login);
-        login_activity_forgot = findViewById(R.id.login_activity_forgot);
+        forgot_passowrd = findViewById(R.id.forgot_passowrd);
         login_activity_email = findViewById(R.id.login_activity_email);
         login_activity_password = findViewById(R.id.login_activity_password);
         login_activity_btn = findViewById(R.id.login_activity_btn);
+        already_account = findViewById(R.id.already_account);
         register_progressbar = findViewById(R.id.register_progressbar);
-        login_fb_btn = findViewById(R.id.login_fb_btn);
-        google_sign_btn = findViewById(R.id.google_sign_btn);
-        login_activity_create_acount.setOnClickListener(this);
+        facebook_btn = findViewById(R.id.facebook_btn);
+        google_btn = findViewById(R.id.google_btn);
         login_activity_btn.setOnClickListener(this);
-        login_activity_forgot.setOnClickListener(this);
-        login_fb_btn.setOnClickListener(this);
-        google_sign_btn.setOnClickListener(this);
+        already_account.setOnClickListener(this);
+        forgot_passowrd.setOnClickListener(this);
+        facebook_btn.setOnClickListener(this);
+        google_btn.setOnClickListener(this);
 
          // Apply Fonts
-        email_heading.setTypeface(SystemUtils.applyFont());
-        password_heading.setTypeface(SystemUtils.applyFont());
-        login_heaading.setTypeface(SystemUtils.didnoFont());
-        login_activity_create_acount.setTypeface(SystemUtils.didnoFont());
-        login_activity_keep_login.setTypeface(SystemUtils.didnoFont());
-        login_activity_forgot.setTypeface(SystemUtils.didnoFont());
-        login_activity_email.setTypeface(SystemUtils.didnoFont());
-        login_activity_password.setTypeface(SystemUtils.didnoFont());
+        login_activity_email.setTypeface(SystemUtils.robotoFont());
+        login_activity_password.setTypeface(SystemUtils.robotoFont());
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -146,7 +138,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.login_activity_create_acount){
+        if(v.getId()==R.id.already_account){
             SystemUtils.startActivity(activity, NewRegisterActivity.class, Constants.CONTINUE_MODE);
         }
         if(v.getId()==R.id.login_activity_btn){
@@ -154,13 +146,13 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                 loginUser();
             }
         }
-        if(v.getId()==R.id.login_activity_forgot){
+        if(v.getId()==R.id.forgot_passowrd){
             SystemUtils.startActivity(LoginActivity.this, ForgotPasswordActivity.class, Constants.CONTINUE_MODE);
         }
-        if(v.getId()==R.id.login_fb_btn){
+        if(v.getId()==R.id.facebook_btn){
             getLoginDetails();
         }
-        if(v.getId()==R.id.google_sign_btn){
+        if(v.getId()==R.id.google_btn){
             signIn();
         }
     }
@@ -196,16 +188,15 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                                 userModel.setUnits(dataObject.getString("m_units"));
                                 userModel.setTimeFormate(dataObject.getString("time_format"));
                                 pref.setObjectData(Constants.USER_OBJECT, userModel);
-                                if(login_activity_keep_login.isChecked()){
                                     pref.saveLogin(true);
-                                }
                                 SystemUtils.showCustomToast(
                                         getResources().getString(R.string.login_successfully), LoginActivity.this);
                                 SystemUtils.startActivity(LoginActivity.this, MainPointActivity.class , Constants.FINISH_MODE);
                             }
                         }
                         else {
-                            SystemUtils.showCustomToast(
+
+                            SystemUtils.showErrorMessage(
                                     getResources().getString(R.string.invalid_email_password), LoginActivity.this);
                         }
                     }
@@ -340,9 +331,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                                 userModel.setUnits(dataObject.getString("m_units"));
                                 userModel.setTimeFormate(dataObject.getString("time_format"));
                                 pref.setObjectData(Constants.USER_OBJECT, userModel);
-                                if(login_activity_keep_login.isChecked()){
                                     pref.saveLogin(true);
-                                }
                                 SystemUtils.showCustomToast(
                                         getResources().getString(R.string.login_successfully), LoginActivity.this);
                                 SystemUtils.startActivity(LoginActivity.this, MainPointActivity.class , Constants.FINISH_MODE);
